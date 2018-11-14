@@ -7,3 +7,7 @@
     vertical-align: baseline;
     background: transparent;
 }
+body{
+    background: url("../images/GoT_background.jpg");
+    background-size:cover;
+}
