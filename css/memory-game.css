@@ -6,31 +6,51 @@
     font-size: 100%;
     vertical-align: baseline;
     background: transparent;
+    box-sizing: border-box
 }
 body{
     background: url("../images/GoT_background.jpg");
-    background-size:cover;
+    background-size:cover ;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 100%;
+    background-attachment: fixed; 
+    background-position: center;
+   
 }
 .title{
-    text-align:center;
     font-family: 'Black And White Picture', sans-serif;
-}
-.container{ 
-    width:90%;
+    color:white;
     text-align: center;
-    
-}
-.row{
-    display: flex;
-    justify-content: space-evenly;
-    
-}
+    position: relative;
+    font-size: 10vh;
+}   
 .card{
-    text-align: center;
     width:100px;
     height:120px;
     border:1px solid white;
+    position: relative;
+    transform-style:preserve-3d;
+    transition: transform 0.5s;
+    background-size:cover;
+    border-radius: 20%;
+    margin:1%;
 }
 
+@media (max-width : 767px) {
+    .card{
+        width : 75px;
+        height: 90px;
+    }
+}
+@media (max-width : 350px) {
+    .card{
+        width : 50px;
+        height: 60px;
+    }
+}
+@media (max-width : 220px) {
+    .card{
+        width : 32px;
+        height: 40px;
+    }
+}
