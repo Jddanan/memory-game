@@ -10,4 +10,27 @@
 body{
     background: url("../images/GoT_background.jpg");
     background-size:cover;
+    background-repeat: no-repeat;
+    height: 100vh;
 }
+.title{
+    text-align:center;
+    font-family: 'Black And White Picture', sans-serif;
+}
+.container{ 
+    width:90%;
+    text-align: center;
+    
+}
+.row{
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+.card{
+    text-align: center;
+    width:100px;
+    height:120px;
+    border:1px solid white;
+}
+
