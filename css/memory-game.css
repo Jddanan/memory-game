@@ -18,7 +18,7 @@ body{
    
 }
 .title{
-    font-family: 'Black And White Picture', sans-serif;
+    font-family: 'Cinzel', serif;
     color:white;
     text-align: center;
     position: relative;
@@ -34,6 +34,11 @@ body{
     background-size:cover;
     border-radius: 20%;
     margin:1%;
+    cursor: pointer;
+}
+.card.flip {
+    transform: rotateY(360deg);
+    visibility: hidden;
 }
 
 @media (max-width : 767px) {
