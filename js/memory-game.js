@@ -107,6 +107,9 @@ got.checkMatch = function () {
         got.count++;
         $("#guess").html(`Wrong guesses: ${got.count}`)
     }
+    if ($(".guessed").length === (got.cardArrayLength)) {
+        got.endModal();
+    }
 }
 
 got.startModal = function () {
@@ -119,16 +122,28 @@ got.startModal = function () {
         got.cardArrayLength = (3 * got.difficulty);
     });
     $("#continue").on("click", function () {
-        if (got.difficulty !== 0){
+        if (got.difficulty !== 0) {
             $('#startModal').css(`display`, `none`);
-        $(".modal-backdrop").css(`display`, `none`);
-        got.start();
+            $(".modal-backdrop").css(`display`, `none`);
+            got.start();
         } else {
             alert("Please select a difficulty")
         }
     })
 };
 got.startModal();
+
+//Winning Modal
+got.endModal = function () {
+    $('#endModal').modal({
+        backdrop: 'static',
+        keyboard: false
+    })
+    $("#modal-score").html(`You made ${got.count} mistakes`);
+    $("#restart").on("click", function(){
+        location.reload();
+    })
+};
 
 got.start = function () {
     got.selectImage();
