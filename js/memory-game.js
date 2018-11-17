@@ -1,12 +1,12 @@
 $(document).ready(function () {
+
 });
 
 // Variable
 var got = {};
-got.difficulty = 4; // Change the number of columns for the difficulty 4, 6 or 8 
+got.difficulty = 0; // Change the number of columns for the difficulty 4, 6 or 8 
 got.col = 0;
-got.cardArrayLength = 3 * got.difficulty;
-var counterId = 0
+got.cardArrayLength = 0;
 got.backCard = "url(./images/card_back.jpg)";
 got.cardArray = [
     "./images/card1.png",
@@ -23,34 +23,10 @@ got.cardArray = [
     "./images/card12.png",
 ];
 got.selectedCard = [];
+var counterId = 0
 
 //Function
-got.bind = function () {
-    $(".card").click(got.flipped)
-}
 //Create the board when the page is loaded
-got.createBoard = function () {
-    if (got.difficulty === 4) {
-        got.col = 3
-    } else if (got.difficulty === 6) {
-        got.col = 2
-    } else if (got.difficulty === 8) {
-        got.col = 1
-    }
-    for (var i = 0; i < 3; i++) {
-        counterId = 1;
-        $("#board").append("<div class ='row justify-content-center'>")
-        for (var j = 0; j < got.difficulty; j++) {
-            counter = (i + 3 * j)
-            $(`.row:nth-child(${i + 1})`).append("<div>")
-            $(`.row div:nth-child(${j + 1})`).addClass(`col-xs-${got.col} card unflip`)
-        }
-    }
-    $(".unflip").css({ "background": got.backCard, "background-size": "cover" })
-    document.getElementById("myAudio").play();
-
-}
-//Select number of image needed for the difficulty from my array of image and duplicate them
 got.selectImage = function () {
     var arr1 = [];
     var arr2 = [];
@@ -70,11 +46,29 @@ got.selectImage = function () {
         }
     }
 }
-
-
+//Select number of image needed for the difficulty from my array of image and duplicate them
+got.createBoard = function () {
+    if (got.difficulty === 4) {
+        got.col = 3
+    } else if (got.difficulty === 6) {
+        got.col = 2
+    } else if (got.difficulty === 8) {
+        got.col = 1
+    }
+    for (var i = 0; i < 3; i++) {
+        counterId = 1;
+        $("#board").append("<div class ='row justify-content-center'>")
+        for (var j = 0; j < got.difficulty; j++) {
+            counter = (i + 3 * j)
+            $(`.row:nth-child(${i + 1})`).append("<div>")
+            $(`.row div:nth-child(${j + 1})`).addClass(`col-xs-${got.col} card unflip`)
+        }
+    }
+    $(".unflip").css({ "background": got.backCard, "background-size": "cover" })
+    document.getElementById("myAudio").play();
+}
 
 got.gameplay = function () {
-
     $(`.card`).on(`click`, function (e) {
         var index = $(`.card`).index(this);         // get selected card's index (0 -> total cols)
         $(this).toggleClass(`unflip flip`);
@@ -97,6 +91,7 @@ got.gameplay = function () {
         }
     });
 }
+
 got.flipped = function (e, index) {
     e.target.style.pointerEvents = `none`;
     e.target.style.backgroundImage = `url('${got.selectedCard[index]}')`;
@@ -112,26 +107,30 @@ got.checkMatch = function () {
     }
 
 }
+
 got.modal = function () {
     $('#myModal').modal({
         backdrop: 'static',
         keyboard: false
     })
     $('input[type=radio]').click(function () {
-        $(this).val();
+        got.difficulty = $(this).val();
+        got.cardArrayLength = (3 * got.difficulty);
     });
-    $("continue").click(got.start());
-}
-
+    $("#continue").on("click", function () {
+        if (got.difficulty !== 0){
+            $('#myModal').css(`display`, `none`);
+        $(".modal-backdrop").css(`display`, `none`);
+        got.start();
+        } else {
+            alert("Please select a difficulty")
+        }
+    })
+};
 got.modal();
 
 got.start = function () {
-    got.createBoard();
     got.selectImage();
-    got.bind();
+    got.createBoard();
     got.gameplay();
 }
-
-
-console.log(got.selectedCard); // to delete
-
