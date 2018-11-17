@@ -15,7 +15,7 @@
     <audio id="myAudio" src="./audio/Game-of-Thrones-8-bit.mp3"></audio>
     <h1 class="title">Game Of Thrones - Memory Game</h1>
     <div class="container" id="board"></div>
-    <div class="modal " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal " id="startModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -34,6 +34,21 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="continue" class="btn btn-primary">Play !!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal " id="endModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">You win, Winter is not coming for you yet </h4>
+                </div>
+                <div class="modal-body" id="modal-score">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="continue" class="btn btn-primary">Play Again</button>
                 </div>
             </div>
         </div>

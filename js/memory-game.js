@@ -23,7 +23,8 @@ got.cardArray = [
     "./images/card12.png",
 ];
 got.selectedCard = [];
-var counterId = 0
+got.counterId = 0;
+got.count = 0;
 
 //Function
 //Create the board when the page is loaded
@@ -55,12 +56,13 @@ got.createBoard = function () {
     } else if (got.difficulty === 8) {
         got.col = 1
     }
+    $("#board").append("<div id='guess' class='row justify-content-center' >");
+    $("#guess").html("Wrong guesses:")
     for (var i = 0; i < 3; i++) {
-        counterId = 1;
+        got.counterId = 1;
         $("#board").append("<div class ='row justify-content-center'>")
         for (var j = 0; j < got.difficulty; j++) {
-            counter = (i + 3 * j)
-            $(`.row:nth-child(${i + 1})`).append("<div>")
+            $(`.row:nth-child(${i + 2})`).append("<div>")
             $(`.row div:nth-child(${j + 1})`).addClass(`col-xs-${got.col} card unflip`)
         }
     }
@@ -95,7 +97,6 @@ got.gameplay = function () {
 got.flipped = function (e, index) {
     e.target.style.pointerEvents = `none`;
     e.target.style.backgroundImage = `url('${got.selectedCard[index]}')`;
-
 }
 
 got.checkMatch = function () {
@@ -103,13 +104,13 @@ got.checkMatch = function () {
         $(`.flip`).addClass(`guessed`);
         $(`.flip`).removeClass(`flip`);
     } else {
-
+        got.count++;
+        $("#guess").html(`Wrong guesses: ${got.count}`)
     }
-
 }
 
-got.modal = function () {
-    $('#myModal').modal({
+got.startModal = function () {
+    $('#startModal').modal({
         backdrop: 'static',
         keyboard: false
     })
@@ -119,7 +120,7 @@ got.modal = function () {
     });
     $("#continue").on("click", function () {
         if (got.difficulty !== 0){
-            $('#myModal').css(`display`, `none`);
+            $('#startModal').css(`display`, `none`);
         $(".modal-backdrop").css(`display`, `none`);
         got.start();
         } else {
@@ -127,7 +128,7 @@ got.modal = function () {
         }
     })
 };
-got.modal();
+got.startModal();
 
 got.start = function () {
     got.selectImage();
