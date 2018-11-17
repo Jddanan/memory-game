@@ -12,6 +12,30 @@
 </head>
 
 <body>
+    <div class="modal " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Please choose a difficulty</h4>
+                </div>
+                <div class="modal-body">
+                    <label class="radio-inline">
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="4"> Easy
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="6"> Medium
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="8"> Hard
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id= "continue" class="btn btn-primary">Play !!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <audio id="myAudio" src="./audio/Game-of-Thrones-8-bit.mp3"></audio>
     <h1 class="title">Game Of Thrones - Memory Game</h1>
     <div class="container" id="board"></div>
 

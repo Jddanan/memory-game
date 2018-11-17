@@ -15,11 +15,21 @@ body{
     height: 100%;
     background-attachment: fixed; 
     background-position: center;
-   
-}
-.title{
     font-family: 'Cinzel', serif;
     color:white;
+
+   
+}
+.modal{
+    top:15%; 
+}
+.modal-content{
+    background: url("../images/bg_modal.jpg");
+    background-size:cover ;
+    background-repeat: no-repeat;
+
+}
+.title{
     text-align: center;
     position: relative;
     font-size: 10vh;
@@ -36,9 +46,14 @@ body{
     margin:1%;
     cursor: pointer;
 }
-.card.flip {
+.card.col-xs-1{
+    width:65px;
+    height:80px
+}
+.flip {
     transform: rotateY(360deg);
-    visibility: hidden;
+    pointer-events: none;
+
 }
 
 @media (max-width : 767px) {
@@ -46,11 +61,17 @@ body{
         width : 75px;
         height: 90px;
     }
+    .title{
+        font-size: 6vh;
+    }
 }
 @media (max-width : 350px) {
     .card{
         width : 50px;
         height: 60px;
+    }
+    .title{
+        font-size: 4vh;
     }
 }
 @media (max-width : 220px) {

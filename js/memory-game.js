@@ -1,10 +1,9 @@
 $(document).ready(function () {
-
 });
 
 // Variable
 var got = {};
-got.difficulty = 8; // Change the number of columns for the difficulty 4, 6 or 8 
+got.difficulty = 4; // Change the number of columns for the difficulty 4, 6 or 8 
 got.col = 0;
 got.cardArrayLength = 3 * got.difficulty;
 var counterId = 0
@@ -26,11 +25,6 @@ got.cardArray = [
 got.selectedCard = [];
 
 //Function
-got.start = function () {
-    got.createBoard();
-    got.selectImage();
-    got.bind();
-}
 got.bind = function () {
     $(".card").click(got.flipped)
 }
@@ -51,9 +45,10 @@ got.createBoard = function () {
             $(`.row:nth-child(${i + 1})`).append("<div>")
             $(`.row div:nth-child(${j + 1})`).addClass(`col-xs-${got.col} card unflip`)
         }
-
     }
     $(".unflip").css({ "background": got.backCard, "background-size": "cover" })
+    document.getElementById("myAudio").play();
+
 }
 //Select number of image needed for the difficulty from my array of image and duplicate them
 got.selectImage = function () {
@@ -77,15 +72,66 @@ got.selectImage = function () {
 }
 
 
+
+got.gameplay = function () {
+
+    $(`.card`).on(`click`, function (e) {
+        var index = $(`.card`).index(this);         // get selected card's index (0 -> total cols)
+        $(this).toggleClass(`unflip flip`);
+        got.flipped(e, index);
+        if ($('.flip').length === 1) {
+            got.selectedFirstCard = got.selectedCard[index];
+        }
+        if ($('.flip').length === 2) {
+            got.selectedSecondCard = got.selectedCard[index];
+            $(`.card`).css(`pointerEvents`, `none`);                         // user can't click on other cards while timeout
+            got.checkMatch();
+            window.setTimeout(function () {
+                $(`.flip`).css(`backgroundImage`, `${got.backCard}`);
+                $(`.card`).css(`pointerEvents`, `all`);                               // user can click again 
+                $(`.guessed`).css(`pointerEvents`, `none`);
+                got.selectedFirstCard = ``;
+                got.selectedSecondCard = ``;
+                $(`.flip`).toggleClass(`flip unflip`)
+            }, [1000]);
+        }
+    });
+}
 got.flipped = function (e, index) {
-    var counter = 0;
-    $(e.target).toggleClass("flip unflip");
-    e.target.style.visibility = `visible`;
     e.target.style.pointerEvents = `none`;
-    e.target.backgroundImage = `url('./img/${got.selectedCard[index]}')`;
+    e.target.style.backgroundImage = `url('${got.selectedCard[index]}')`;
+
 }
 
-got.start();
+got.checkMatch = function () {
+    if (got.selectedFirstCard === got.selectedSecondCard) {
+        $(`.flip`).addClass(`guessed`);
+        $(`.flip`).removeClass(`flip`);
+    } else {
+
+    }
+
+}
+got.modal = function () {
+    $('#myModal').modal({
+        backdrop: 'static',
+        keyboard: false
+    })
+    $('input[type=radio]').click(function () {
+        $(this).val();
+    });
+    $("continue").click(got.start());
+}
+
+got.modal();
+
+got.start = function () {
+    got.createBoard();
+    got.selectImage();
+    got.bind();
+    got.gameplay();
+}
+
 
 console.log(got.selectedCard); // to delete
 
