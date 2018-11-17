@@ -49,13 +49,6 @@ got.selectImage = function () {
 }
 //Select number of image needed for the difficulty from my array of image and duplicate them
 got.createBoard = function () {
-    if (got.difficulty === 4) {
-        got.col = 3
-    } else if (got.difficulty === 6) {
-        got.col = 2
-    } else if (got.difficulty === 8) {
-        got.col = 1
-    }
     $(`#board`).append(`<div id='header' class='row justify-content-center'>`);
     $('#header').append($('<button id="newGame"></button>'));
     $('#newGame').html("Restart")
@@ -64,11 +57,11 @@ got.createBoard = function () {
     })
     $("#board").append("<div id='guess' class='row justify-content-center'>");
     $("#guess").html("Wrong guesses:");
-    $("#guess").prepend("<img id='mute' src='./images/mute.png'/>")
+    $("#header").append("<img id='mute' src='./images/mute.png'/>")
     $("#mute").on("click", function () {
         document.getElementById("myAudio").pause();
     });
-    $("#guess").prepend("<img id='play' src='./images/play-button.png'/>");
+    $("#header").append("<img id='play' src='./images/play-button.png'/>");
     $("#play").on("click", function () {
         document.getElementById("myAudio").play();
     });
@@ -77,7 +70,7 @@ got.createBoard = function () {
         $("#board").append("<div class ='row justify-content-center'>")
         for (var j = 0; j < got.difficulty; j++) {
             $(`.row:nth-child(${i + 3})`).append("<div>")
-            $(`.row div:nth-child(${j + 1})`).addClass(`col-xs-${got.col} card unflip`)
+            $(`.row div:nth-child(${j + 1})`).addClass(`col-xs-1 card unflip`)
         }
     }
     $(".unflip").css({ "background": got.backCard, "background-size": "cover" })

@@ -32,11 +32,12 @@ body{
 .title{
     text-align: center;
     position: relative;
-    font-size: 10vh;
+    font-size: 7vh;
 }   
  #mute,#play{
-    height:4vh;
+    height:5vh;
     cursor: pointer;
+    margin:1%
  }
 .card{
     width:100px;
@@ -63,6 +64,7 @@ body{
     color:white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     font-size: 5vh;
+    cursor: pointer;
 }
 
 @media (max-width : 767px) {
