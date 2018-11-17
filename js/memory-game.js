@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    
 });
 
 // Variable
@@ -56,13 +56,27 @@ got.createBoard = function () {
     } else if (got.difficulty === 8) {
         got.col = 1
     }
-    $("#board").append("<div id='guess' class='row justify-content-center' >");
-    $("#guess").html("Wrong guesses:")
+    $(`#board`).append(`<div id='header' class='row justify-content-center'>`);
+    $('#header').append($('<button id="newGame"></button>'));
+    $('#newGame').html("Restart")
+    $('#newGame').on(`click`, function () {                          // refreshes the page, offering a new game to the user
+        location.reload();
+    })
+    $("#board").append("<div id='guess' class='row justify-content-center'>");
+    $("#guess").html("Wrong guesses:");
+    $("#guess").prepend("<img id='mute' src='./images/mute.png'/>")
+    $("#mute").on("click", function () {
+        document.getElementById("myAudio").pause();
+    });
+    $("#guess").prepend("<img id='play' src='./images/play-button.png'/>");
+    $("#play").on("click", function () {
+        document.getElementById("myAudio").play();
+    });
     for (var i = 0; i < 3; i++) {
         got.counterId = 1;
         $("#board").append("<div class ='row justify-content-center'>")
         for (var j = 0; j < got.difficulty; j++) {
-            $(`.row:nth-child(${i + 2})`).append("<div>")
+            $(`.row:nth-child(${i + 3})`).append("<div>")
             $(`.row div:nth-child(${j + 1})`).addClass(`col-xs-${got.col} card unflip`)
         }
     }
@@ -140,10 +154,12 @@ got.endModal = function () {
         keyboard: false
     })
     $("#modal-score").html(`You made ${got.count} mistakes`);
-    $("#restart").on("click", function(){
+    $("#restart").on("click", function () {
         location.reload();
     })
 };
+
+
 
 got.start = function () {
     got.selectImage();
