@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    
+
 });
 
 // Variable
@@ -28,6 +28,35 @@ got.count = 0;
 
 //Function
 //Create the board when the page is loaded
+got.startModal = function () {
+    $('#startModal').modal({
+        backdrop: 'static',
+        keyboard: false
+    })
+    $('input[type=radio]').click(function () {
+        got.difficulty = $(this).val();
+        got.cardArrayLength = (3 * got.difficulty);
+        if ($(this).val() == 4) {
+            got.col = 3
+        } else if ($(this).val() == 6) {
+            got.col = 2
+        } else if ($(this).val() == 8) {
+            got.col = 1
+        }
+    });
+    $("#continue").on("click", function () {
+        if (got.difficulty !== 0) {
+            $('#startModal').css(`display`, `none`);
+            $(".modal-backdrop").css(`display`, `none`);
+            got.start();
+        } else {
+            alert("Please select a difficulty")
+        }
+    })
+};
+got.startModal();
+
+//Select number of image needed for the difficulty from my array of image and duplicate them
 got.selectImage = function () {
     var arr1 = [];
     var arr2 = [];
@@ -47,12 +76,11 @@ got.selectImage = function () {
         }
     }
 }
-//Select number of image needed for the difficulty from my array of image and duplicate them
 got.createBoard = function () {
     $(`#board`).append(`<div id='header' class='row justify-content-center'>`);
     $('#header').append($('<button id="newGame"></button>'));
     $('#newGame').html("Restart")
-    $('#newGame').on(`click`, function () {                          // refreshes the page, offering a new game to the user
+    $('#newGame').on(`click`, function () {
         location.reload();
     })
     $("#board").append("<div id='guess' class='row justify-content-center'>");
@@ -70,7 +98,7 @@ got.createBoard = function () {
         $("#board").append("<div class ='row justify-content-center'>")
         for (var j = 0; j < got.difficulty; j++) {
             $(`.row:nth-child(${i + 3})`).append("<div>")
-            $(`.row div:nth-child(${j + 1})`).addClass(`col-xs-1 card unflip`)
+            $(`.row div:nth-child(${j + 1})`).addClass(`col-xs-${got.col} card unflip`)
         }
     }
     $(".unflip").css({ "background": got.backCard, "background-size": "cover" })
@@ -119,27 +147,6 @@ got.checkMatch = function () {
     }
 }
 
-got.startModal = function () {
-    $('#startModal').modal({
-        backdrop: 'static',
-        keyboard: false
-    })
-    $('input[type=radio]').click(function () {
-        got.difficulty = $(this).val();
-        got.cardArrayLength = (3 * got.difficulty);
-    });
-    $("#continue").on("click", function () {
-        if (got.difficulty !== 0) {
-            $('#startModal').css(`display`, `none`);
-            $(".modal-backdrop").css(`display`, `none`);
-            got.start();
-        } else {
-            alert("Please select a difficulty")
-        }
-    })
-};
-got.startModal();
-
 //Winning Modal
 got.endModal = function () {
     $('#endModal').modal({
@@ -151,8 +158,6 @@ got.endModal = function () {
         location.reload();
     })
 };
-
-
 
 got.start = function () {
     got.selectImage();

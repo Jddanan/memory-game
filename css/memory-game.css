@@ -72,6 +72,23 @@ body{
         width : 75px;
         height: 90px;
     }
+    .card.col-xs-1{
+        width:50px;
+        height: 60px;
+    }
+    .title{
+        font-size: 6vh;
+    }
+}
+@media (max-width : 520px) {
+    .col-xs-2{
+        width : 50px;
+        height: 60px;
+    }
+    .card.col-xs-1{
+        width : 75px;
+        height: 90px;
+    }
     .title{
         font-size: 6vh;
     }
