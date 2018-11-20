@@ -83,7 +83,7 @@ got.createBoard = function () {
     $('#newGame').on(`click`, function () {
         location.reload();
     })
-    $("#board").append("<div id='guess' class='row justify-content-center'>");
+    $("#board").append("<div id='guess' class='row justify-content-center'>");//
     $("#guess").html("Wrong guesses:");
     $("#header").append("<img id='mute' src='./images/mute.png'/>")
     $("#mute").on("click", function () {
@@ -138,6 +138,7 @@ got.checkMatch = function () {
     if (got.selectedFirstCard === got.selectedSecondCard) {
         $(`.flip`).addClass(`guessed`);
         $(`.flip`).removeClass(`flip`);
+
     } else {
         got.count++;
         $("#guess").html(`Wrong guesses: ${got.count}`)
